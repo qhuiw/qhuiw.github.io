@@ -1,0 +1,23 @@
+# Jekyll cache
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+
+# Bundler cache
+vendor
+Gemfile.lock
+
+# NPM dependencies
+node_modules
+package-lock.json
+
+# IDE configurations
+.idea
+.vscode
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Misc
+_sass/dist
+assets/js/dist
