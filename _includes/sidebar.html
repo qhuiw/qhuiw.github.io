@@ -4,13 +4,11 @@
   <header class="profile-wrapper text-center">
     <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle mx-auto">
       {%- if site.avatar != empty and site.avatar -%}
-        {% comment %}
-          {%- capture avatar_url -%}
+        {%- capture avatar_url -%}
             {% include media-url.html src=site.avatar %}
           {%- endcapture -%}
-        {% endcomment %}
-        {% comment %} <img src="{{- avatar_url -}}" alt="avatar" onerror="this.style.display='none'"> {% endcomment %}
-        <img src="{{ site.avatar }}" alt="avatar" onerror="this.style.display='none'">
+        <img src="{{- avatar_url -}}" alt="avatar" onerror="this.style.display='none'">
+        {% comment %} <img src="{{ site.avatar }}" alt="avatar" onerror="this.style.display='none'"> {% endcomment %}
       {%- endif -%}
     </a>
 

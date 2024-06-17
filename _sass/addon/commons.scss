@@ -710,7 +710,7 @@ $btn-mb: 0.5rem;
     transform: translateZ(0); /* fixed the zoom in Safari */
 
     img {
-      transition: transform 0.5s;
+      // transition: transform 0.5s;
 
       &:hover {
         transform: scale(1.2);

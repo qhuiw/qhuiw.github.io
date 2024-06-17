@@ -199,7 +199,7 @@ defaults:
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
   - scope: # static assets
-      path: assets/js/dist
+      path: /assets/js/dist
     values:
       swcache: true
 
