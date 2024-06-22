@@ -17,7 +17,7 @@ In addition to my main research, I have broad interests in the following areas:
 - Cloud and Distributed systems, especially the design of robust, low-overhead, high-performant systems in an industrial viable scale.
 - Microarchitecture and Operating Systems, the hardware-software interfaces.
 - Cryptography, in terms of security protocols and blockchain applications.
-- Formal methods, especially the application of type theory and model checking to software verification.
+<!-- - Formal methods, especially the application of type theory and model checking to software verification. -->
   <!-- - Programming languages and compilers, especially the design and implementation of type systems and static analysis. -->
 
 <!-- the application of formal methods to secure software development. -->
