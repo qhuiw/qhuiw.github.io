@@ -1,6 +1,6 @@
 ---
 title: Writing a New Post
-author: qianhui
+author: cotes
 date: 2024-06-11 
 # categories: [Blogging, Tutorial]
 # tags: [writing]
