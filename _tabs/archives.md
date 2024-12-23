@@ -1,6 +1,6 @@
 ---
 layout: archives
 title: Posts
-icon: fas fa-feather
+icon: fas fa-archive
 order: 2
 ---

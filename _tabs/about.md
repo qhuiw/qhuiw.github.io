@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Me
-icon: fas fa-archive
+icon: fas fa-feather-alt
 permalink: /about/
 order: 1
 ---
