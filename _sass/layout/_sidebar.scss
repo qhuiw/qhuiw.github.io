@@ -61,10 +61,10 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     box-shadow: var(--avatar-border-color) 0 0 0 2px;
     transform: translateZ(0); /* fixed the zoom in Safari */
 
-    @include bp.sm {
-      width: 10rem; // 7rem;
-      height: 10rem; // 7rem;
-    }
+    // @include bp.sm {
+    //   width: 10rem; // 7rem;
+    //   height: 10rem; // 7rem;
+    // }
 
     img {
       transition: transform 0.5s;
