@@ -1,13 +1,14 @@
 <!-- The Side Bar -->
 
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
-  <header class="profile-wrapper">
-    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle">
+  <header class="profile-wrapper text-center">
+    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle mx-auto">
       {%- if site.avatar != empty and site.avatar -%}
         {%- capture avatar_url -%}
           {% include media-url.html src=site.avatar %}
         {%- endcapture -%}
-        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+        <img src="{{- avatar_url -}}" alt="avatar" onerror="this.style.display='none'">
+        {% comment %} <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> {% endcomment %}
       {%- endif -%}
     </a>
 
@@ -41,21 +42,45 @@
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
-    {% unless site.theme_mode %}
-      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
-        <i class="fas fa-adjust"></i>
-      </button>
+    {% comment %}
+      {% unless site.theme_mode %}
+        <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+          <i class="fas fa-adjust"></i>
+        </button>
 
-      {% if site.data.contact.size > 0 %}
-        <span class="icon-border"></span>
-      {% endif %}
-    {% endunless %}
+        {% if site.data.contact.size > 0 %}
+          <span class="icon-border"></span>
+        {% endif %}
+      {% endunless %}
+    {% endcomment %}
 
     {% for entry in site.data.contact %}
       {% case entry.type %}
-        {% when 'github', 'twitter' %}
+        {% when 'github', 'twitter', 'facebook', 'instagram' %}
           {%- capture url -%}
             https://{{ entry.type }}.com/{{ site[entry.type].username }}
+          {%- endcapture -%}
+        {% when 'youtube' %}
+          {%- capture url -%}
+            https://www.youtube.com/@{{ site[entry.type].username }}
+          {%- endcapture -%}
+          {% comment %}
+            {% when 'facebook' %}
+              {%- capture url -%}
+                https://www.facebook.com/{{ site[entry.type].username }}
+              {%- endcapture -%}
+            {% when 'instagram' %}
+              {%- capture url -%}
+                https://www.instagram.com/{{ site[entry.type].username }}
+              {%- endcapture -%}
+          {% endcomment %}
+        {% when 'linkedin' %}
+          {%- capture url -%}
+            https://www.linkedin.com/in/{{ site[entry.type].username }}
+          {%- endcapture -%}
+        {% when 'mastodon' %}
+          {%- capture url -%}
+            {{ site[entry.type].instance }}/web/accounts/{{ site[entry.type].username }}
           {%- endcapture -%}
         {% when 'email' %}
           {% assign email = site.social.email | split: '@' %}

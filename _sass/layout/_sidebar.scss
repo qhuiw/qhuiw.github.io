@@ -55,15 +55,15 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
 
   #avatar {
     display: block;
-    width: 6.5rem;
-    height: 6.5rem;
+    width: 10rem; //6.5rem;
+    height: 10rem; //6.5rem;
     overflow: hidden;
     box-shadow: var(--avatar-border-color) 0 0 0 2px;
     transform: translateZ(0); /* fixed the zoom in Safari */
 
     @include bp.sm {
-      width: 7rem;
-      height: 7rem;
+      width: 10rem; //7rem;
+      height: 10rem; //7rem;
     }
 
     img {
@@ -105,7 +105,7 @@ $sidebar-display: 'sidebar-display'; /* the attribute for sidebar display */
     letter-spacing: 0.25px;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
-    width: fit-content;
+    // width: fit-content;
     color: var(--site-title-color);
   }
 

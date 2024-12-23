@@ -3,9 +3,11 @@
 <header id="topbar-wrapper" aria-label="Top Bar">
   <div
     id="topbar"
-    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+    class="d-flex align-items-center px-lg-3 h-100"
   >
-    <nav id="breadcrumb" aria-label="Breadcrumb">
+    <!-- justify-content-between -->
+
+    <nav id="breadcrumb" aria-label="Breadcrumb" class="flex-grow-1">
       {% assign paths = page.url | split: '/' %}
 
       {% if paths.size == 0 or page.layout == 'home' %}
@@ -66,12 +68,24 @@
         id="search-input"
         type="search"
         aria-label="search"
-        autocomplete="off"
+        autocomplete="on"
         placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
       >
     </search>
     <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
       {{- site.data.locales[include.lang].search.cancel -}}
     </button>
+
+    {% unless site.theme_mode %}
+      <button type="button" class="btn btn-link nav-link pe-1" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      {% comment %}
+        {% if site.data.contact.size > 0 %}
+          <span class="icon-border"></span>
+        {% endif %}
+      {% endcomment %}
+    {% endunless %}
   </div>
 </header>
