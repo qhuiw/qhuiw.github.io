@@ -1,4 +1,15 @@
 <!-- The Footer -->
+<!-- 
+
+This is a Jekyll include file used for the footer component.
+
+When Jekyll builds the site, this file will be processed and included 
+in pages that reference it via the "include 'footer.html' tag.
+
+Content inside comment blocks is ignored during the build process 
+and will not appear in the generated HTML output. It's used for internal 
+notes and documentation that should not be rendered.
+-->
 
 <footer
   aria-label="Site Info"
@@ -47,6 +58,7 @@
     {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
   </p>
 </footer>
+
 {% comment %}
   <footer>
     <div class="container pl-lg-4 pr-lg-4">
@@ -64,11 +76,6 @@
 
         <div class="footer-right">
           <p class="mb-0">
-
-
-
-
-
             Powered by
             <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
              with

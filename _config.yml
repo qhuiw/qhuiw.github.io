@@ -34,10 +34,10 @@ timezone: Europe/London
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Qianhui's Blog
+title: "Qianhui's Blog"
 # 천휘의 블로그
 
-tagline: CS research
+tagline: "CS research"
 
 description:
   Ph.D. student in Computer Science. Systems, Security and Architecture, University of Cambridge.
@@ -51,7 +51,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
 
 social:
-  name: 천휘•Qianhui
+  name: Qianhui•천휘•千卉
   email: qw304@cam.ac.uk
   links: # The first element serves as the copyright owner's link
     - https://github.com/qhuiw
