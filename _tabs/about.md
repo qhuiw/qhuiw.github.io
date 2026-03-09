@@ -8,11 +8,11 @@ order: 1
 
 ### Bio
 
-I am currently working towards a PhD at the security group of the Department of Computer Science and Technology at the University of Cambridge, under the supervision of Prof. [Robert N. M. Watson][Watson]. I held a [Bachelor][ANU] in Advanced Computing from the ANU, specialising in Computer Systems and Architecture, and a [MPhil][MPhil] in ACS from Cambridge. I am now researching hardware-assisted memory safety for language runtimes in the [CHERI][CHERI] group.
+I am currently working towards a Ph.D. at the security group of the Department of Computer Science and Technology at the University of Cambridge, under the supervision of Prof. [Robert N. M. Watson][Watson]. I held a [Bachelor][ANU] in Advanced Computing from the ANU, specialising in Computer Systems and Architecture, and a [MPhil][MPhil] in ACS from Cambridge. I am now researching hardware-assisted memory safety for language runtimes in the [CHERI][CHERI] group. I thank the [CASCADE][CASCADE] Research Centre for funding my Ph.D. study. 
 
 ### Research Interests
 
-- Operating systems and language runtimes security, through the approach of hardware-software codesign. This would require knowledge about hardware emulators, isntruction sets, OS kernels, C/C++ toolchains, and higher level languages.
+- Operating systems and language runtimes security, through the approach of hardware-software codesign. This would require knowledge about hardware emulators, instruction sets, OS kernels, C/C++ toolchains, and higher-level language runtimes.
 - Cryptograhic protocols and their applications to blockchains.
 <!-- - , especially the design and implementation of type systems and static analysis. -->
 <!-- - Cloud and distributed systems, especially the design of robust, low-overhead, high-performant systems in an industrial viable scale. -->
@@ -31,6 +31,7 @@ I am also interested in history and social studies. You may find me inside museu
 
 [ANU]: https://cecc.anu.edu.au/study/undergraduate/bachelor-advanced-computing/
 [CHERI]: https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/
+[CASCADE]: https://www.cl.cam.ac.uk/research/cascade/
 [MPhil]: https://www.cst.cam.ac.uk/admissions/acs
 [Watson]: https://www.cl.cam.ac.uk/~rnw24/
 
