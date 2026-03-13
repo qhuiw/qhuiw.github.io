@@ -2,8 +2,8 @@
 title: Writing a New Post
 author: cotes
 date: 2024-06-11 
-# categories: [Blogging, Tutorial]
-# tags: [writing]
+categories: [Blogging, Tutorial]
+tags: [writing]
 render_with_liquid: false
 ---
 

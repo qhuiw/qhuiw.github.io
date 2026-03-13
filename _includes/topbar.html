@@ -9,6 +9,7 @@
 
     <nav id="breadcrumb" aria-label="Breadcrumb" class="flex-grow-1">
       {% assign paths = page.url | split: '/' %}
+      {% assign breadcrumb_path = '' %}
 
       {% if paths.size == 0 or page.layout == 'home' %}
         <!-- index page -->
@@ -30,10 +31,11 @@
               <span>{{ page.title }}</span>
             {% endif %}
 
-          {% elsif page.layout == 'category' or page.layout == 'tag' %}
+          {% elsif page.layout == 'category' or page.layout == 'tag' or page.layout == 'categories' or page.layout == 'tags' %}
+            {% capture breadcrumb_path %}{{ breadcrumb_path }}/{{ item }}{% endcapture %}
             <span>
-              <a href="{{ item | append: '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
+              <a href="{{ breadcrumb_path | append: '/' | relative_url }}">
+                {{- site.data.locales[include.lang].tabs[item] | default: item -}}
               </a>
             </span>
           {% endif %}

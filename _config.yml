@@ -37,7 +37,7 @@ timezone: Europe/London
 title: "Qianhui's Blog"
 # 천휘의 블로그
 
-tagline: "CS research"
+tagline: "CS research: Systems, Security and Architecture"
 
 description:
   Ph.D. student in Computer Science. Systems, Security and Architecture, University of Cambridge.
@@ -213,8 +213,8 @@ jekyll-archives:
     category: category
     tag: tag
   permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
+    tag: /archives/tags/:name/
+    category: /archives/categories/:name/
 
 # Exclude from processing.
 # The following items will not be processed, by default.
