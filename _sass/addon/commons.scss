@@ -904,6 +904,34 @@ $btn-mb: 0.5rem;
     color: #999999;
   }
 
+  #mode-toggle {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border-radius: 50%;
+    color: var(--sidebar-btn-color);
+    background-color: var(--sidebar-btn-bg);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @extend %clickable-transition;
+    // transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:not(:focus-visible) {
+      box-shadow: var(--sidebar-border-color) 0 0 0 1px;
+    }
+
+    i {
+      color: inherit;
+    }
+
+    &:hover {
+      background-color: var(--sidebar-hover-bg);
+      color: var(--sidebar-active-color);
+    }
+  }
+
   #breadcrumb {
     font-size: 1rem;
     color: var(--text-muted-color);

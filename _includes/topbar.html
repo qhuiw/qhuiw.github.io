@@ -78,17 +78,17 @@
       {{- site.data.locales[include.lang].search.cancel -}}
     </button>
 
-    <div class="ms-3"></div>
+    <div class="ms-3 "></div>
     {% unless site.theme_mode %}
-      <button type="button" class="btn btn-link nav-link pe-1" aria-label="Switch Mode" id="mode-toggle">
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
         <i class="fas fa-adjust"></i>
       </button>
 
-      {% comment %}
-        {% if site.data.contact.size > 0 %}
+      <!-- {% comment %} -->
+        <!-- {% if site.data.contact.size > 0 %}
           <span class="icon-border"></span>
-        {% endif %}
-      {% endcomment %}
+        {% endif %} -->
+      <!-- {% endcomment %} -->
     {% endunless %}
   </div>
 </header>
