@@ -230,4 +230,28 @@ order: 2
     </div>
   </article>
 
+  <article>
+    <div class="talk-deck-thumb">
+      <iframe src="/assets/slides/20221030-amd.pdf" alt="Preview of amd talk" width="100%" height="500px">
+      </iframe>
+    </div>
+
+    <div class="talk-deck-body">
+      <h3 class="talk-deck-title">
+        <span class="talk-deck-title-text">
+          Algorithmic Mechanism Design: A New Frontier in Algorithmic Game Theory
+        </span>
+      </h3>
+      <p class="talk-deck-meta">Advanced Algorithms video tutorial • 2022 Oct</p>
+      <p class="talk-deck-description">
+        <!-- Short summary of this talk in 1-2 sentences. -->
+        <span class="abstract-keyword">Abstract:</span> Algorithmic mechanism design is a subfield of algorithmic game theory that focuses on designing algorithms and mechanisms to achieve desired outcomes in strategic settings. It combines techniques from computer science, economics, and game theory to create efficient and effective solutions for various problems, such as auctions, resource allocation, and social choice. In this talk, we will explore the fundamental concepts of algorithmic mechanism design, including incentive compatibility, social welfare maximisation, and computational complexity. We will also introduce some of the latest research developments in this exciting field and their applications in real-world scenarios.
+      </p>
+      <p class="talk-deck-links">
+        <a href="/assets/slides/20221030-amd.pptx" target="_blank" rel="noopener">Slides (.pptx)</a>
+      </p>
+    </div>
+  </article>
+  More to come...
+
 </div>

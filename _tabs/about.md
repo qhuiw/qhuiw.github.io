@@ -8,7 +8,7 @@ order: 1
 
 ### Bio
 
-I am currently working towards a Ph.D. in the security group of the Department of Computer Science and Technology at the University of Cambridge, under the supervision of Prof. [Robert N. M. Watson][Watson]. I held a [Bachelor][ANU] in Advanced Computing from the ANU, specialising in Computer Systems and Architecture, and a [MPhil][MPhil] in ACS from Cambridge. I am now researching hardware-assisted memory safety for language runtimes in the [CHERI][CHERI] group. I gratefully acknowledge the generous support from the [CASCADE Research Centre][CASCADE] in funding my Ph.D. studies. 
+I am currently working towards a Ph.D. in the security group of the Department of Computer Science and Technology at the University of Cambridge, under the supervision of Prof. [Robert N. M. Watson][Watson]. I hold a [Bachelor][ANU] of Advanced Computing from the ANU, specialising in Computer Systems and Architecture, and a [MPhil][MPhil] in ACS from Cambridge, taking courses with the same focus on Systems, Architecture, and Security. Since MPhil, I have been researching hardware-assisted memory safety for language runtimes in the [CHERI][CHERI] group. I gratefully acknowledge the generous support from the [CASCADE Research Centre][CASCADE] in funding my Ph.D. studies. 
 
 ### Research Interests
 
@@ -29,7 +29,9 @@ A fun fact about me is that I have developed a strong interest in natural langua
 
 I am also interested in human history and social studies. You may find me inside museums, opera houses, dance theatres, or art galleries off work.
 
-[ANU]: https://cecc.anu.edu.au/study/undergraduate/bachelor-advanced-computing/
+[ANU]: https://programsandcourses.anu.edu.au/2020/program/AACOM
+<!-- https://systems.anu.edu.au/study/undergraduate-programs/bachelor-advanced-computing-honours -->
+<!-- https://cecc.anu.edu.au/study/undergraduate/bachelor-advanced-computing/ -->
 [CHERI]: https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/
 [CASCADE]: https://www.cl.cam.ac.uk/research/cascade/
 [MPhil]: https://www.cst.cam.ac.uk/admissions/acs
