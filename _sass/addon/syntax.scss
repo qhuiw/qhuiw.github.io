@@ -56,13 +56,32 @@ html {
     @extend %code-snippet-bg;
   }
 
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: min(70vh, 32rem);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   padding-bottom: 0.75rem;
+
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background-color: var(--code-header-icon-color);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
   pre {
     margin-bottom: 0;
     font-size: variables.$code-font-size;
     line-height: 1.4rem;
+    width: max-content;
+    min-width: 100%;
     word-wrap: normal; /* Fixed Safari overflow-x */
   }
 
@@ -183,6 +202,8 @@ div {
 .code-header {
   @extend %no-cursor;
 
+  $dot-margin: 1rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -190,9 +211,24 @@ div {
   margin-left: 0.75rem;
   margin-right: 0.25rem;
 
+  &::before {
+    content: '';
+    display: inline-block;
+    margin-left: $dot-margin;
+    width: variables.$code-dot-size;
+    height: variables.$code-dot-size;
+    border-radius: 50%;
+    background-color: var(--code-dot-red);
+    box-shadow: (variables.$code-dot-size + variables.$code-dot-gap) 0 0
+        var(--code-dot-yellow),
+      (variables.$code-dot-size + variables.$code-dot-gap) * 2 0 0
+        var(--code-dot-green);
+  }
+
   /* the label block */
   span {
     line-height: variables.$code-header-height;
+    margin-left: calc(($dot-margin + variables.$code-dot-size) / 2 * -1);
 
     /* label icon */
     i {
@@ -268,27 +304,6 @@ div {
 
     .code-header {
       @include module.ml-mr(0);
-
-      $dot-margin: 1rem;
-
-      &::before {
-        content: '';
-        display: inline-block;
-        margin-left: $dot-margin;
-        width: variables.$code-dot-size;
-        height: variables.$code-dot-size;
-        border-radius: 50%;
-        background-color: var(--code-header-muted-color);
-        box-shadow: (variables.$code-dot-size + variables.$code-dot-gap) 0 0
-            var(--code-header-muted-color),
-          (variables.$code-dot-size + variables.$code-dot-gap) * 2 0 0
-            var(--code-header-muted-color);
-      }
-
-      span {
-        // center the text of label
-        margin-left: calc(($dot-margin + variables.$code-dot-size) / 2 * -1);
-      }
     }
   }
 }
