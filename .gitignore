@@ -22,3 +22,6 @@ package-lock.json
 # Misc
 # _sass/dist
 # assets/js/dist
+
+# OS generated files
+.DS_Store

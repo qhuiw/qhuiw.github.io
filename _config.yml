@@ -117,7 +117,7 @@ comments:
     category: General
     category_id: DIC_kwDONg9FMc4C4p0J # required, copy from https://giscus.app
     mapping: pathname # optional, default to 'pathname'
-    strict: '0' # optional, default to '0'
+    strict: '1'
     input_position: top # optional, default to 'bottom'
     lang: en # optional, default to the value of site.lang
     reactions_enabled: '1' # optional, default to the value of '1'
