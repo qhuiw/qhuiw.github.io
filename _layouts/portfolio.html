@@ -1,0 +1,322 @@
+---
+layout: page
+---
+
+{% include lang.html %}
+
+<div id="portfolio" class="portfolio-layout">
+  {{ content }}
+</div>
+
+{% if page.audio_cards %}
+<script>
+    (() => {
+      const toMmSs = (seconds) => {
+        const total = Math.max(0, Math.floor(Number(seconds) || 0));
+        const mm = String(Math.floor(total / 60)).padStart(2, '0');
+        const ss = String(total % 60).padStart(2, '0');
+        return `${mm}:${ss}`;
+      };
+
+      const normalizeLines = (lines) => {
+        return (lines || []).map((line, idx, arr) => {
+          const start = Number(line.start) || 0;
+          const nextStart = idx + 1 < arr.length ? Number(arr[idx + 1].start) : Number.POSITIVE_INFINITY;
+          return {
+            start,
+            end: Number.isFinite(nextStart) ? nextStart : Number.POSITIVE_INFINITY,
+            text: line.text || ''
+          };
+        });
+      };
+
+      const initVisualizer = (card, audio) => {
+        const canvas = card.querySelector('.audio-visualizer');
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!canvas || !audio || !AudioCtx) return null;
+
+        const g = canvas.getContext('2d');
+        if (!g) return null;
+
+        const audioCtx = new AudioCtx();
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.86;
+
+        const src = audioCtx.createMediaElementSource(audio);
+        src.connect(analyser);
+        analyser.connect(audioCtx.destination);
+
+        const waveform = new Uint8Array(analyser.fftSize);
+        let rafId = 0;
+        let width = 0;
+        let height = 0;
+
+        const css = getComputedStyle(card);
+        const lineColor = css.getPropertyValue('--link-color').trim() || '#2b8aef';
+        const glowColor = css.getPropertyValue('--heading-color').trim() || lineColor;
+        const gridColor = css.getPropertyValue('--main-border-color').trim() || 'rgba(128,128,128,0.35)';
+
+        const resize = () => {
+          const ratio = window.devicePixelRatio || 1;
+          width = Math.max(1, Math.floor(canvas.clientWidth || 1));
+          height = Math.max(1, Math.floor(canvas.clientHeight || 1));
+          canvas.width = Math.floor(width * ratio);
+          canvas.height = Math.floor(height * ratio);
+          g.setTransform(ratio, 0, 0, ratio, 0, 0);
+        };
+
+        const drawIdle = () => {
+          g.clearRect(0, 0, width, height);
+          g.fillStyle = 'transparent';
+          g.fillRect(0, 0, width, height);
+
+          const midY = height * 0.5;
+          g.strokeStyle = gridColor;
+          g.lineWidth = 1;
+          g.beginPath();
+          g.moveTo(0, midY);
+          g.lineTo(width, midY);
+          g.stroke();
+        };
+
+        const drawFrame = () => {
+          analyser.getByteTimeDomainData(waveform);
+          g.clearRect(0, 0, width, height);
+
+          const midY = height * 0.5;
+          g.strokeStyle = gridColor;
+          g.lineWidth = 1;
+          g.beginPath();
+          g.moveTo(0, midY);
+          g.lineTo(width, midY);
+          g.stroke();
+
+          g.beginPath();
+          const step = width / (waveform.length - 1);
+          for (let i = 0; i < waveform.length; i += 1) {
+            const x = i * step;
+            const v = waveform[i] / 128;
+            const y = v * (height * 0.5);
+            if (i === 0) g.moveTo(x, y);
+            else g.lineTo(x, y);
+          }
+
+          g.strokeStyle = lineColor;
+          g.lineWidth = 2;
+          g.shadowColor = glowColor;
+          g.shadowBlur = 8;
+          g.stroke();
+          g.shadowBlur = 0;
+
+          rafId = window.requestAnimationFrame(drawFrame);
+        };
+
+        resize();
+        drawIdle();
+        window.addEventListener('resize', () => {
+          resize();
+          if (!rafId) drawIdle();
+        });
+
+        return {
+          start: async () => {
+            if (audioCtx.state === 'suspended') {
+              await audioCtx.resume();
+            }
+            if (!rafId) {
+              rafId = window.requestAnimationFrame(drawFrame);
+            }
+          },
+          stop: () => {
+            if (rafId) {
+              window.cancelAnimationFrame(rafId);
+              rafId = 0;
+            }
+            drawIdle();
+          }
+        };
+      };
+
+      const syncActiveLine = (card) => {
+        const state = card._transcriptState;
+        if (!state || !state.audio || !state.currentLines || !state.currentLines.length) return;
+
+        const current = state.audio.currentTime || 0;
+        let nextIndex = -1;
+
+        for (let i = 0; i < state.currentLines.length; i += 1) {
+          const line = state.currentLines[i];
+          if (current >= line.start && current < line.end) {
+            nextIndex = i;
+            break;
+          }
+        }
+
+        if (nextIndex === state.activeIndex) return;
+
+        if (state.activeIndex >= 0 && state.lineItems[state.activeIndex]) {
+          state.lineItems[state.activeIndex].classList.remove('is-active');
+        }
+
+        state.activeIndex = nextIndex;
+
+        if (nextIndex >= 0 && state.lineItems[nextIndex]) {
+          const activeItem = state.lineItems[nextIndex];
+          activeItem.classList.add('is-active');
+          activeItem.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+        }
+      };
+
+      const renderTranscript = (card, lang) => {
+        const state = card._transcriptState;
+        if (!state || !state.data || !state.lines) return;
+
+        const lines = normalizeLines(state.data[lang] || []);
+        state.lines.setAttribute('data-lang', lang);
+        state.lines.innerHTML = '';
+        state.currentLines = lines;
+        state.lineItems = [];
+        state.activeIndex = -1;
+
+        lines.forEach((line) => {
+          const li = document.createElement('li');
+          li.className = 'transcript-line';
+          const seek = document.createElement('button');
+          seek.type = 'button';
+          seek.innerHTML = `<time>${toMmSs(line.start)}</time>${line.text}`;
+          seek.addEventListener('click', () => {
+            if (!state.audio) return;
+            state.audio.currentTime = Number(line.start) || 0;
+            state.audio.play();
+            syncActiveLine(card);
+          });
+          li.appendChild(seek);
+          state.lines.appendChild(li);
+          state.lineItems.push(li);
+        });
+
+        syncActiveLine(card);
+      };
+
+      const init = async () => {
+        const cards = document.querySelectorAll('.audio-card[data-transcript], .audio-card[data-transcript-fallback]');
+        if (!cards.length) return;
+
+        for (const card of cards) {
+          const primarySrc = card.getAttribute('data-transcript');
+          const fallbackSrc = card.getAttribute('data-transcript-fallback');
+          const hasOfficial = card.getAttribute('data-has-official') === 'true';
+          const labelOfficial = card.getAttribute('data-transcript-label-official') || 'Lyrics';
+          const labelAi = card.getAttribute('data-transcript-label-ai') || 'Transcript (AI Generated)';
+          const lines = card.querySelector('.transcript-lines');
+          const audio = card.querySelector('audio');
+          const transcriptSummary = card.querySelector('.transcript-summary');
+          const transcriptDetails = card.querySelector('.transcript-block');
+          const toggles = card.querySelectorAll('.transcript-lang');
+          if ((!primarySrc && !fallbackSrc) || !lines) continue;
+
+          if (audio) {
+            audio.addEventListener('contextmenu', (evt) => {
+              evt.preventDefault();
+            });
+          }
+
+          try {
+            let payload = null;
+            let lastErr = null;
+            let loadedSrc = null;
+
+            const candidates = [primarySrc, fallbackSrc].filter(Boolean);
+            for (const src of candidates) {
+              try {
+                const res = await fetch(src);
+                if (!res.ok) {
+                  throw new Error(`Transcript fetch failed (${src}): ${res.status}`);
+                }
+                payload = await res.json();
+                loadedSrc = src;
+                break;
+              } catch (err) {
+                lastErr = err;
+              }
+            }
+
+            if (!payload) {
+              throw lastErr || new Error('Transcript fetch failed');
+            }
+
+            if (transcriptSummary) {
+              const usingOfficial = hasOfficial && Boolean(primarySrc) && loadedSrc === primarySrc;
+              transcriptSummary.textContent = usingOfficial ? labelOfficial : labelAi;
+            }
+
+            card._transcriptState = {
+              audio,
+              lines,
+              visualizer: initVisualizer(card, audio),
+              lineItems: [],
+              currentLines: [],
+              activeIndex: -1,
+              data: {
+                zh: payload.zh || [],
+                en: payload.en || []
+              }
+            };
+
+            if (audio) {
+              ['timeupdate', 'seeking', 'seeked', 'play'].forEach((evtName) => {
+                audio.addEventListener(evtName, () => syncActiveLine(card));
+              });
+
+              audio.addEventListener('play', () => {
+                if (transcriptDetails && !transcriptDetails.open) {
+                  transcriptDetails.open = true;
+                }
+
+                if (card._transcriptState.visualizer) {
+                  card._transcriptState.visualizer.start();
+                }
+              });
+
+              ['pause', 'ended'].forEach((evtName) => {
+                audio.addEventListener(evtName, () => {
+                  if (card._transcriptState.visualizer) {
+                    card._transcriptState.visualizer.stop();
+                  }
+                });
+              });
+            }
+
+            const defaultLang = lines.getAttribute('data-lang') || 'zh';
+            renderTranscript(card, defaultLang);
+
+            toggles.forEach((toggle) => {
+              toggle.addEventListener('click', () => {
+                const lang = toggle.getAttribute('data-lang');
+                if (!lang) return;
+
+                toggles.forEach((btn) => {
+                  const active = btn === toggle;
+                  btn.classList.toggle('is-active', active);
+                  btn.setAttribute('aria-selected', active ? 'true' : 'false');
+                });
+
+                renderTranscript(card, lang);
+              });
+            });
+          } catch (err) {
+            lines.innerHTML = '<li>Transcript unavailable.</li>';
+            console.error(err);
+          }
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+{% endif %}

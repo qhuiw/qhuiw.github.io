@@ -187,6 +187,17 @@ collections:
     output: true
     permalink: /posts/:title/
 
+# Build-time audio transcript generation.
+audio_transcripts:
+  enabled: false
+  whisper_bin: /opt/homebrew/bin/whisper
+  model: small
+  source_dir: assets/audio
+  output_dir: assets/transcripts
+  force: false
+  mapping:
+    "万物不如你_ch9o326.m4a": "wanwu-buru-ni.json"
+
 defaults:
   - scope:
       path: "" # An empty string means all files in the project
