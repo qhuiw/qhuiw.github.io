@@ -23,9 +23,7 @@ I am currently working towards a Ph.D. in the security group of the Department o
 
 ### Fun facts
 
-A fun fact about me is that I have developed a strong interest in natural languages from a young age and once aimed to obtain a second degree in Languages and Linguistics. During my undergraduate studies, I systematically studied Japanese and Korean as my third and fourth languages. However, I soon learnt about the complexity and depth of computer science open problems, and decided to devote more time to it and soon graduated with a single degree. In my free time, I still enjoy exploring human languages and literature, and this passion has helped me quickly adapt to research problems in programming languages.
-
-<!-- I aim to combine my passion for languages and computer science by researching the intersection of programming languages and formal methods, and to develop secure and efficient software systems that can be easily understood and maintained by human developers. -->
+A fun fact about me is that I've had a strong interest in human languages since a young age and once aimed to obtain a second degree in Languages and Linguistics. For example, during my undergraduate studies, I systematically studied Japanese and Korean as my third and fourth languages. However, I soon learnt about the complexity and depth of computer science open research problems, and decided to devote more time to it and soon graduated with a single degree in CS. In my free time, I still enjoy exploring human languages and literature, and this passion has helped me quickly adapt to research problems in the field of programming languages.
 
 I am also interested in human history and social studies. You may find me inside museums, opera houses, dance theatres, or art galleries off work.
 

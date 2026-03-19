@@ -1,0 +1,12 @@
+header {
+  .page-subtitle {
+    @extend %heading !optional;
+
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+}

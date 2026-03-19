@@ -85,6 +85,18 @@ html {
     word-wrap: normal; /* Fixed Safari overflow-x */
   }
 
+  /* Some Rouge outputs use <div class="highlight"><code>...</code></div> without <pre>. */
+  > code {
+    display: block;
+    margin-bottom: 0;
+    font-size: variables.$code-font-size;
+    line-height: 1.4rem;
+    width: max-content;
+    min-width: 100%;
+    white-space: pre;
+    word-wrap: normal;
+  }
+
   table {
     td {
       &:first-child {

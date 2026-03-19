@@ -1,5 +1,5 @@
 ---
-title: "Caveats of using *make* for creating FreeBSD VM images"
+title: "Caveats of using <code>make</code> for creating FreeBSD VM images"
 author: qianhui
 date: 2026-03-17 00:00:00 +0000
 categories: [Research]
