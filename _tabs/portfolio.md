@@ -12,7 +12,7 @@ order: 4
 <!-- good to use sun/leaf/tree as icons -->
 
 ## Vocals
-I can sing in Chinese, Japanese, Korean, and English. Most often I sing in Chinese, and especially the pop pieces made for drama series. I also perform at local events and gatherings at times. Here are some of my highlights:
+I sing in Chinese, Japanese, Korean, and of course English. Most often I cover drama OSTs. I also perform at local events and gatherings at times. Here are some of my highlights:
 
 <section class="audio-showcase">
   {% include portfolio-audio-card.html
