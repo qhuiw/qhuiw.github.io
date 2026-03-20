@@ -56,9 +56,7 @@ html {
     @extend %code-snippet-bg;
   }
 
-  // overflow: hidden;
-  overflow-y: auto;
-  overflow-x: auto;
+  overflow: auto;
   max-height: min(70vh, 32rem);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
@@ -85,9 +83,6 @@ html {
     word-wrap: break-word;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    max-height: min(70vh, 32rem);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   /* Some Rouge outputs use <div class="highlight"><code>...</code></div> without <pre>. */
@@ -100,9 +95,6 @@ html {
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    max-height: min(70vh, 32rem);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   table {
@@ -122,14 +114,9 @@ html {
       }
 
       pre {
-        overflow: visible; /* Fixed iOS safari overflow-x */
         word-break: break-word;
         white-space: pre-wrap;
-
         overflow-wrap: break-word;
-        max-height: min(70vh, 32rem);
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
       }
     }
   }
