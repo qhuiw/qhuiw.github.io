@@ -56,7 +56,9 @@ html {
     @extend %code-snippet-bg;
   }
 
-  overflow: hidden;
+  // overflow: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
   max-height: min(70vh, 32rem);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
@@ -119,6 +121,11 @@ html {
         overflow: visible; /* Fixed iOS safari overflow-x */
         word-break: break-word;
         white-space: pre-wrap;
+
+        overflow-wrap: break-word;
+        max-height: min(70vh, 32rem);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
     }
   }
