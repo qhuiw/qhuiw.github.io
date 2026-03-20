@@ -276,6 +276,41 @@ sup {
   }
 }
 
+.references-section {
+  > h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+.references-list {
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+
+  > .reference-item {
+    line-height: 1.7;
+
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+.reference-cite {
+  a {
+    border-bottom-style: none;
+  }
+}
+
+.reference-backlink {
+  margin-left: 0.35rem;
+  border-bottom-style: none;
+  white-space: nowrap;
+}
+
 /* --- Begin of Markdown table style --- */
 
 /* it will be created by Liquid */

@@ -1,0 +1,12 @@
+{%- comment -%}
+  Inline citation marker linking to a numbered reference.
+  Usage: {% include cite.html n=1 %}
+{%- endcomment -%}
+
+{%- assign cite_number = include.n | default: include.number -%}
+{%- assign id_prefix = include.id_prefix | default: page.references_id_prefix | default: 'ref' -%}
+{%- assign cite_occurrence = include.occ | default: include.occurrence | default: 1 -%}
+
+{%- if cite_number -%}
+  <sup id="cite-{{ id_prefix }}-{{ cite_number }}-{{ cite_occurrence }}" class="reference-cite"><a href="#{{ id_prefix }}-{{ cite_number }}">[{{ cite_number }}]</a></sup>
+{%- endif -%}

@@ -20,8 +20,17 @@ In this post, I will survey the current state of userspace support for ARM MTE, 
 ## Linux & <code>glibc</code>
 <!-- Linux has been actively working on integrating ARM MTE support into the kernel and userspace. The Linux kernel has added support for MTE in recent versions, allowing applications to take advantage of this feature.  -->
 Linux kernel 5.10+
+a Linux kernel compiled with memory tagging support (CONFIG_ARM64_MTE).
 
 Glibc (GNU C Library) version 2.33 and later supports ARM MTE on AArch64 Linux. 
+
+- check if linux kernel supports MTE:
+  ```shell
+  $ grep MTE /boot/config-$(uname -r)
+  CONFIG_ARM64_MTE=y
+  CONFIG_ARM64_AS_HAS_MTE=y
+  $ 
+  ```
 
 
 ```shell

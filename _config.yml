@@ -147,12 +147,17 @@ social_preview_image: # string, local or CORS resources
 # will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-# cdn: "https://chirpy-img.netlify.app"
+cdn: "https://chirpy-img.netlify.app"
+
+# When true, resolve avatar via `media-url` (affected by `cdn`/subpath); when false, use local relative URL unless avatar is absolute.
+avatar_use_media_url: false
 
 # the avatar on sidebar, support local or CORS resources
+# eg
 # avatar: "/commons/avatar.jpg"
-# https://chirpy-img.netlify.app/commons/avatar.jpg
-avatar: /assets/img/IMG_0019.JPG
+# => this resolves to https://chirpy-img.netlify.app/commons/avatar.jpg
+avatar: "/assets/img/IMG_0019.JPG"
+
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:

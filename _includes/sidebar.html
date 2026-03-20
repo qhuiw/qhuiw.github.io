@@ -4,9 +4,15 @@
   <header class="profile-wrapper text-center">
     <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle overflow-hidden d-inline-block">
       {%- if site.avatar != empty and site.avatar -%}
-        {%- capture avatar_url -%}
+        {%- if site.avatar_use_media_url -%}
+          {%- capture avatar_url -%}
             {% include media-url.html src=site.avatar %}
           {%- endcapture -%}
+        {%- elsif site.avatar contains '://' -%}
+          {%- assign avatar_url = site.avatar -%}
+        {%- else -%}
+          {%- assign avatar_url = site.avatar | relative_url -%}
+        {%- endif -%}
         <img src="{{- avatar_url -}}" alt="avatar" onerror="this.style.display='none'">
         {% comment %} <img src="{{ site.avatar }}" alt="avatar" onerror="this.style.display='none'"> {% endcomment %}
       {%- endif -%}

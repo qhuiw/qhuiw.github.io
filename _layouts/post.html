@@ -99,6 +99,15 @@ tail_includes:
     {{ content }}
   </div>
 
+  {% if page.references_auto or page.references or page.references_data_key or page.references_markdown %}
+    {% include references.html
+      references=page.references
+      data_key=page.references_data_key
+      markdown=page.references_markdown
+      heading=page.references_heading
+    %}
+  {% endif %}
+
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->
     {% if page.categories.size > 0 %}

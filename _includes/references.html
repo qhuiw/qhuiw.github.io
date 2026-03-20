@@ -1,0 +1,88 @@
+{%- comment -%}
+  Reusable references block.
+  Supported sources (in order):
+  1) include.references
+  2) page.references
+  3) include.data_key (dot path inside site.data)
+  4) include.markdown
+{%- endcomment -%}
+
+{%- assign references = include.references -%}
+
+{%- if references == nil or references == empty -%}
+  {%- assign references = page.references -%}
+{%- endif -%}
+
+{%- if (references == nil or references == empty) and include.data_key -%}
+  {%- assign data_node = site.data -%}
+  {%- assign data_path = include.data_key | split: '.' -%}
+  {%- for node in data_path -%}
+    {%- assign data_node = data_node[node] -%}
+  {%- endfor -%}
+  {%- assign references = data_node -%}
+{%- endif -%}
+
+{%- assign heading = include.heading | default: page.references_heading | default: 'References' -%}
+{%- assign id_prefix = include.id_prefix | default: page.references_id_prefix | default: 'ref' -%}
+{%- assign show_backlink = include.show_backlink | default: page.references_show_backlink | default: true -%}
+
+{%- if references and references.size > 0 -%}
+  <section class="references-section mt-5" aria-label="{{ heading | escape }}">
+    <h2>{{ heading }}</h2>
+    <ol class="references-list">
+      {%- for ref in references -%}
+        {%- assign author_text = '' -%}
+        {%- if ref.authors -%}
+          {%- assign author_text = ref.authors | join: ', ' -%}
+        {%- elsif ref.author -%}
+          {%- assign author_text = ref.author -%}
+        {%- endif -%}
+
+        {%- assign year_text = ref.year -%}
+        {%- if year_text == nil or year_text == '' -%}
+          {%- if ref.date -%}
+            {%- assign year_text = ref.date | date: '%Y' -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if year_text == nil or year_text == '' -%}
+          {%- assign year_text = 'n.d.' -%}
+        {%- endif -%}
+
+        {%- assign title_text = ref.title | default: ref.name -%}
+        {%- assign source_text = ref.source | default: ref.container | default: ref.publisher | default: ref.site -%}
+        {%- assign url_text = ref.url | default: ref.link -%}
+        {%- assign accessed_text = ref.accessed | default: ref.accessed_date -%}
+
+        <li class="reference-item" id="{{ id_prefix }}-{{ forloop.index }}">
+          {%- if author_text != '' -%}
+            {{ author_text | escape }}
+          {%- endif -%}
+          {%- if author_text != '' -%} {% endif -%}
+          ({{ year_text | escape }}).
+          {%- if title_text != '' -%}
+            <em>{{ title_text | escape }}</em>.
+          {%- endif -%}
+          {%- if source_text != '' -%}
+            {{ source_text | escape }}.
+          {%- endif -%}
+          {%- if url_text != '' -%}
+            <a href="{{ url_text | escape }}" target="_blank" rel="noopener">{{ url_text | escape }}</a>.
+          {%- endif -%}
+          <!-- {%- if accessed_text != '' -%}
+            Accessed.{{ accessed_text | escape }} -->
+          {%- endif -%}
+          {%- if show_backlink -%}
+            <a class="reference-backlink" href="#cite-{{ id_prefix }}-{{ forloop.index }}-1" aria-label="Back to citation {{ forloop.index }}">↩</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </section>
+{%- elsif include.markdown -%}
+  <section class="references-section mt-5" aria-label="{{ heading | escape }}">
+    <h2>{{ heading }}</h2>
+    <div class="references-markdown">
+      {{ include.markdown | markdownify }}
+    </div>
+  </section>
+{%- endif -%}
