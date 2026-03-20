@@ -80,9 +80,13 @@ html {
     margin-bottom: 0;
     font-size: variables.$code-font-size;
     line-height: 1.4rem;
-    width: max-content;
-    min-width: 100%;
-    word-wrap: normal; /* Fixed Safari overflow-x */
+    width: 100%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    max-height: min(70vh, 32rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Some Rouge outputs use <div class="highlight"><code>...</code></div> without <pre>. */
@@ -91,10 +95,13 @@ html {
     margin-bottom: 0;
     font-size: variables.$code-font-size;
     line-height: 1.4rem;
-    width: max-content;
-    min-width: 100%;
-    white-space: pre;
-    word-wrap: normal;
+    width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: min(70vh, 32rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   table {
