@@ -2,10 +2,15 @@
 title: "A Practical Note for Git Commands"
 author: qianhui
 date: 2026-03-30 00:00:00 +0000
+description: >-
+  A practical note for commonly used Git commands, categorised by their purposes.
 categories: [Configuration]
 tags: [git]
 render_with_liquid: false
 ---
+
+## Disclaimer
+This note is intended to be a quick reference for common Git commands and is not an exhaustive list of all Git commands or options. Always refer to the official Git documentation or `git help [command/concept]` for the most comprehensive and up-to-date information on Git commands and their usage.
 
 ## Commands for Starting a Working Area
 
