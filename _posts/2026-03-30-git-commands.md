@@ -26,10 +26,20 @@ This note is intended to be a quick reference for common Git commands and is not
 - when the local directory `dir` is not empty:
   ```shell
   user@host dir % git init
+  user@host dir % git add .
+  user@host dir % git commit -m "Initial commit"
   user@host dir % git remote add origin <repo_url>
+  user@host dir % git pull --rebase origin <remote_branch_name> # pull the remote branch and rebase the local branch on top of it
+  user@host dir % git push -u origin <remote_branch_name> # push the local branch to the remote repository and set the upstream tracking branch
+  ```
+  or 
+  ```shell
   user@host dir % git fetch origin # fetches all branches and tags from the remote repository
+
   user@host dir % git switch <remote_branch_name> # create a new local branch that tracks the remote branch
-  ```  
+  OR
+  user@host dir % git rebase origin/<remote_branch_name> # rebase the local branch on top of the remote branch
+  ```
 - clone a specific branch or tag:
   ```shell
   user@host % git clone -b <branch/tag_name> <repo_url>
