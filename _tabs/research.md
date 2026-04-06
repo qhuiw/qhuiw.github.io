@@ -30,7 +30,8 @@ order: 2
 
 <div class="talk-deck-list">
   {% capture cascade_links %}
-    <a href="/assets/slides/20260310-cascade-temporal-armmte.pptx" target="_blank" rel="noopener">Slides (animated .pptx)</a>
+    <a href="/assets/slides/20260310-cascade-temporal-armmte.pptx" target="_blank" rel="noopener">Slides (animated .pptx)</a> |
+     <a href="https://www.cl.cam.ac.uk/research/cascade/events/2026-03-10-showcase/video/qianhui.mp4" target="_blank" rel="noopener">Recording</a>
   {% endcapture %}
 
   {% include research/talk-card.html
@@ -43,7 +44,8 @@ order: 2
   %}
 
   {% capture wics_links %}
-    <a href="/assets/slides/20260220-wics-hwsw-interface.pptx" target="_blank" rel="noopener">Slides (animated .pptx)</a>
+    <a href="/assets/slides/20260220-wics-hwsw-interface.pptx" target="_blank" rel="noopener">Slides (animated .pptx)</a> |
+    <a href="https://youtu.be/wRuxT7aGuEw?list=PLstyePOvf2d3h-Fz6T1s9m9ye2IpEqtTL" target="_blank" rel="noopener">Recording</a>
   {% endcapture %}
 
   {% include research/talk-card.html
