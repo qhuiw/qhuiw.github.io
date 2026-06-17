@@ -44,9 +44,14 @@ This note is intended to be a quick reference for common Git commands and is not
   ```shell
   user@host % git clone -b <branch/tag_name> <repo_url>
   ```
-- clone and download history only for a specific branch:
+- clone and download history only for a specific branch/tag:
   ```shell
-  user@host % git clone --branch <branch_name> --single-branch <repo_url>
+  user@host % git clone --branch <branch/tag_name> --single-branch <repo_url>
+  ```
+- clone and download history (complete commit graph, history references, and tree metadata) without actual file contents(blobs) 
+  (bloatless partial clone) for a specific branch/tag:
+  ```shell
+  user@host % git clone --filter=blob:none --branch <branch/tag_name> <repo_url>
   ```
 - clone with a specific depth (shallow clone):
   ```shell
