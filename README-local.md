@@ -59,3 +59,20 @@ A `/research/` tab listing publications and talks as cards with inline PDF previ
 - `assets/css/jekyll-theme-chirpy.scss` — added `@use 'custom/research';` (after the main `@use`, before the "append your custom style" comment).
 
 **Assets referenced:** `/assets/publications/usenixsecurity25-wang-nan.pdf`, `/assets/slides/2026*.{pdf,pptx}`, `/assets/slides/20221030-amd.{pdf,pptx}`.
+
+### Portfolio / audio-lyrics-transcript tab
+A `/portfolio/` tab showcasing vocal covers as audio cards with a karaoke-style synced transcript (zh/en toggle), waveform canvas, and download-protected `<audio>`.
+
+**New files**
+- `_tabs/portfolio.md` — uses **custom `layout: portfolio`**; front matter `audio_cards: true`, `display_title`, `subtitle`. Body has a `<section class="audio-showcase">` with `portfolio-audio-card.html` includes.
+- `_layouts/portfolio.html` — **custom layout** (`layout: page` parent). Wraps content in `#portfolio` and carries the **inline transcript-sync `<script>`** (gated by `page.audio_cards`): fetches the transcript JSON, syncs lines to audio time, handles the zh/en toggle and the canvas visualizer. Includes the **stock** `lang.html` (harmless). No rollup/JS-build change needed (JS is inline).
+- `_includes/portfolio-audio-card.html` — one audio card: `<audio>` + `<details>` transcript block with zh/en toggle + empty `<ul class="transcript-lines">` (filled by the inline JS). Reads `data-transcript*` attributes.
+- `_sass/custom/_portfolio.scss` — card/transcript/visualizer styles (pure CSS custom properties).
+
+**⚠ Modified stock files**
+- `assets/css/jekyll-theme-chirpy.scss` — added `@use 'custom/portfolio';`.
+
+**Assets:** `assets/audio/*.m4a` (3, ~22 MB, Chinese filenames — needs UTF-8 locale), `assets/transcripts/*.json` (AI), `assets/trans-official/*.json` (official lyrics), `assets/lyrics/*.txt`. Transcript JSON shape: `{ track, source, zh:[{start,text}], en:[{start,text}] }`.
+
+> `lang.html` and `language-alias.html` are **stock** v7.5.0 includes (lang detection + code-block language-alias display), *not* a custom multilingual layer — nothing to port there.
+> ⚠ Browser spot-check needed for the JS-driven bits: audio playback, transcript karaoke sync, zh/en toggle, waveform visualizer.

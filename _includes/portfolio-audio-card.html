@@ -1,0 +1,44 @@
+<article
+  class="audio-card"
+  {% if include.transcript_official %}data-transcript="{{ include.transcript_official }}"{% elsif include.transcript %}data-transcript="{{ include.transcript }}"{% elsif include.transcript_ai %}data-transcript="{{ include.transcript_ai }}"{% endif %}
+  {% if include.transcript_official and include.transcript_ai %}data-transcript-fallback="{{ include.transcript_ai }}"{% endif %}
+  data-has-official="{% if include.transcript_official %}true{% else %}false{% endif %}"
+  data-transcript-label-official="{{ include.transcript_label_official | default: 'Lyrics' }}"
+  data-transcript-label-ai="{{ include.transcript_label_ai | default: 'Transcript (AI Generated)' }}"
+>
+  <h3>{{ include.title }}</h3>
+  {% if include.description %}
+    <p class="audio-description">{{ include.description }}</p>
+  {% endif %}
+  <p class="audio-watermark">{{ include.watermark | default: 'Warning: Please do not redistribute without permission.' }}</p>
+  <canvas class="audio-visualizer" aria-hidden="true"></canvas>
+  <audio controls controlslist="nodownload noplaybackrate" disablepictureinpicture preload="none" oncontextmenu="return false;">
+    <source src="{{ include.audio }}" type="{{ include.type | default: 'audio/mp4' }}">
+    Your browser does not support the audio element.
+  </audio>
+
+  {% if include.lyrics_source_name or include.lyrics_source_url %}
+    <p class="lyrics-source-note">
+      Licensed lyrics source:
+      {% if include.lyrics_source_url %}
+        <a href="{{ include.lyrics_source_url }}" target="_blank" rel="noopener noreferrer">
+          {{ include.lyrics_source_name | default: include.lyrics_source_url }}
+        </a>
+      {% else %}
+        {{ include.lyrics_source_name }}
+      {% endif %}
+    </p>
+  {% endif %}
+
+  <details class="transcript-block">
+    <summary class="transcript-summary">{{ include.transcript_label_ai | default: 'Transcript (AI Generated)' }}</summary>
+    <div class="transcript-content">
+      <div class="transcript-toolbar" role="tablist" aria-label="Transcript language toggle">
+        <button class="transcript-lang is-active" type="button" data-lang="zh" aria-selected="true">Chinese</button>
+        <button class="transcript-lang" type="button" data-lang="en" aria-selected="false">English</button>
+      </div>
+      <p class="transcript-note">Tap any timestamp to seek in the audio.</p>
+      <ul class="transcript-lines" data-lang="zh"></ul>
+    </div>
+  </details>
+</article>

@@ -1,0 +1,163 @@
+.portfolio-layout {
+  .audio-showcase {
+    margin-top: 1rem;
+
+    .audio-card {
+      border: 1px solid var(--language-border-color);
+      border-radius: 1rem;
+      background: linear-gradient(145deg, var(--highlight-bg-color), transparent);
+      padding: 1rem 1rem 0.9rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      margin-bottom: 1.25rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .audio-description {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+
+    audio {
+      width: 100%;
+      display: block;
+      margin-bottom: 0.45rem;
+    }
+
+    .audio-visualizer {
+      width: 100%;
+      height: 4.25rem;
+      display: block;
+      border: 1px solid var(--main-border-color);
+      border-radius: 0.5rem;
+      margin-bottom: 0.8rem;
+      background:
+        radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--link-color) 10%, transparent), transparent 45%),
+        linear-gradient(180deg, color-mix(in srgb, var(--highlight-bg-color) 82%, transparent), transparent);
+    }
+
+    .audio-watermark {
+      border-left: 3px solid var(--link-color);
+      background: color-mix(in srgb, var(--highlight-bg-color) 80%, transparent);
+      color: var(--text-muted-color);
+      font-size: 0.86rem;
+      letter-spacing: 0.02em;
+      padding: 0.35rem 0.6rem;
+      margin-bottom: 0.55rem;
+      border-radius: 0.35rem;
+    }
+
+    .lyrics-source-note {
+      color: var(--text-muted-color);
+      font-size: 0.82rem;
+      margin-bottom: 0.65rem;
+
+      a {
+        color: var(--link-color);
+        border-bottom: 1px dotted color-mix(in srgb, var(--link-color) 55%, transparent);
+      }
+    }
+
+    .transcript-block {
+      border-top: 1px dashed var(--main-border-color);
+      padding-top: 0.7rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--heading-color);
+      margin-bottom: 0.25rem;
+    }
+
+    .transcript-content {
+      padding-top: 0.45rem;
+
+      .transcript-note {
+        color: var(--text-muted-color);
+        font-size: 0.9rem;
+        margin-bottom: 0.65rem;
+      }
+
+      .transcript-toolbar {
+        display: inline-flex;
+        gap: 0.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .transcript-lang {
+        border: 1px solid var(--main-border-color);
+        background: transparent;
+        color: var(--text-color);
+        border-radius: 999px;
+        font-size: 0.85rem;
+        line-height: 1;
+        padding: 0.4rem 0.7rem;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-color: var(--link-color);
+          color: var(--link-color);
+        }
+
+        &.is-active {
+          background: var(--link-color);
+          border-color: var(--link-color);
+          color: #fff;
+        }
+      }
+
+      .transcript-lines {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        max-height: 7.2rem;
+        overflow-y: auto;
+        padding-right: 0.35rem;
+        scroll-behavior: smooth;
+
+        li {
+          margin-bottom: 0.45rem;
+          border-radius: 0.4rem;
+          transition: background-color 0.2s ease;
+
+          &.is-active {
+            background: color-mix(in srgb, var(--link-color) 14%, transparent);
+          }
+        }
+
+        button {
+          background: transparent;
+          border: 0;
+          color: var(--text-color);
+          padding: 0;
+          text-align: left;
+          line-height: 1.45;
+          width: 100%;
+
+          &:hover {
+            color: var(--link-color);
+          }
+        }
+
+        time {
+          color: var(--text-muted-color);
+          display: inline-block;
+          min-width: 3.5rem;
+          margin-right: 0.5rem;
+        }
+      }
+
+      p {
+        margin-bottom: 0.45rem;
+        line-height: 1.45;
+        font-size: 0.98rem;
+      }
+    }
+  }
+}
