@@ -54,6 +54,17 @@ export GLIBC_TUNABLES=glibc.malloc.mte=3
 ```
 
 
+## GCC
+Support for Memory Tagging Extension (MTE) compilation in GCC is primarily available from GCC 9 and later, with improved, robust support in subsequent versions. 
+
+Here are the key details regarding MTE support in GCC:
+- Initial Support: Initial MTE ISA support was introduced around GCC 9, which allows the use of ACLE intrinsics (e.g., __arm_mte_create_tag) to create, set, and manipulate tags.
+- Hardware Tag-Based KASAN: For Linux kernel Hardware Tag-Based KASAN (Kernel Address Sanitizer), GCC 10 or later is recommended.
+- Compilation Flag: MTE compilation is enabled by using the -march=armv8.5-a+memtag flag.
+- Binutils: To use MTE in GCC, you must also have GNU Binutils 2.33 or later, with 2.45 adding further support.
+- Heap Tagging: Glibc 2.33 and higher supports MTE for userspace heap tagging. 
+For the best support of MTE features, including modern CPU optimizations and improved hardware tagging, using a recent version such as GCC 12, 13, or 14 is recommended, as MTE support was developed incrementally across these versions.
+
 
 
 ## XNU & LLVM/Clang
