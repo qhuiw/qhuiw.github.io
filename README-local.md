@@ -18,13 +18,14 @@ you know exactly what was changed, why, and how to re-apply it.
 - Requires a UTF-8 locale or the gemspec's `git ls-files` chokes on non-ASCII (Chinese audio) filenames: `export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8`.
 - `assets/lib` is the **`chirpy-static-assets` submodule** (self-hosted libs, no CDN). Fresh clones need `git clone --recursive` (or `git submodule update --init`). CI deploy must set `submodules: true`.
 - Local build: `bundle install`; `npm install`; `npm run build` (generates `_sass/vendors/` + `assets/js/dist/`); `bundle exec jekyll serve`. Production check: `JEKYLL_ENV=production bundle exec jekyll build`.
+- **CI gates** (run on push to *any* branch, incl. `wip`): `lint-scss` (`npm run lint:scss` — custom SCSS must conform; auto-fix via `npm run lint:fix:scss`), `lint-js` (`npm run lint:js`), and `ci` (`bash tools/test.sh` = production build + **htmlproofer internal-link check**). Run all three locally before pushing. Note: because `cdn` is empty, htmlproofer treats former-CDN image paths as internal — any post relying on CDN-hosted images will fail it.
 
 ---
 
 ## Phase 0–3 — base port
 
 ### ⚠ Modified stock files
-- **`_config.yml`** — site identity merged in: `title`, `tagline`, `description`, `timezone: Europe/London`, `lang: en`, `github.username: qhuiw`, `social.*`, `comments.provider: giscus` (+ giscus repo/category IDs), `pageviews.provider: goatcounter`, `avatar: /assets/img/IMG_0019.JPG`, **`cdn: ""`** (no CDN), **`assets.self_host.enabled: true`**, and `jekyll-archives` permalinks → `/archives/tags/:name/` and `/archives/categories/:name/`.
+- **`_config.yml`** — site identity merged in: `title`, `tagline`, `description`, `timezone: Europe/London`, `lang: en`, `github.username: qhuiw`, `social.*`, `comments.provider: giscus` (+ giscus repo/category IDs), `pageviews.provider: goatcounter`, `avatar: /assets/img/IMG_0019.JPG`, **`cdn: ""`** (no CDN), **`assets.self_host.enabled: true`**. (jekyll-archives permalinks kept at v7.5.0 **stock** `/tags/:name/` + `/categories/:name/` — we use the stock tag/category layouts/links, so the old `/archives/...` scheme would break ~1000 internal links. Restoring `/archives/...` would require editing every link-generating stock file — deferred to a future custom-archives port.)
 - **`_data/contact.yml`** — sidebar socials: keep github + email, add LinkedIn (with url); youtube/rss left commented (youtube needs the custom sidebar — Phase 4).
 - **`_data/authors.yml`** — appended `qianhui` author (used by `author: qianhui` in posts).
 - **`_layouts/post.html`** — added a guarded references block between `<div class="content">` and `<div class="post-tail-wrapper">`:
@@ -40,7 +41,7 @@ you know exactly what was changed, why, and how to re-apply it.
 - `_includes/cite.html`, `_includes/references.html` — citation feature (inline `{% include cite.html n=N %}` markers + a bibliography list rendered from a post's `references:` front matter).
 - `_tabs/about.md` (replaces stock About content), 9 posts under `_posts/2026-*.md`, media under `assets/{img,code,publications,slides}`.
 
-> Note: stock demo posts (`2019-*`, `customize-the-favicon`) are still present — prune when ready. Two old posts were malformed and skipped; the now-fixed `2026-03-21-mte-architectural-support.md` is re-ported in Phase 4.
+> Note: stock demo posts (`2019-*`, `customize-the-favicon`) were **removed** — their demo images are hosted on the chirpy-img CDN, which our no-CDN setup disables, so they became broken internal links (htmlproofer failed). Two old posts were malformed and skipped; the now-fixed `2026-03-21-mte-architectural-support.md` is re-ported in Phase 4.
 
 ---
 

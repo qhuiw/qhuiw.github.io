@@ -219,5 +219,5 @@ jekyll-archives:
     category: category
     tag: tag
   permalinks:
-    tag: /archives/tags/:name/
-    category: /archives/categories/:name/
+    tag: /tags/:name/
+    category: /categories/:name/

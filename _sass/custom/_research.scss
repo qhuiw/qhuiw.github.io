@@ -18,7 +18,7 @@
   padding: 1rem;
   border: 1px solid var(--main-border-color, #e5e5e5);
   border-radius: 0.75rem;
-  background: var(--card-bg, #fff);
+  background: var(--card-bg, #ffffff);
 }
 
 .pub-thumb,
@@ -29,6 +29,7 @@
 
 .pdf-frame {
   --pdf-ui-height: 68px;
+
   position: relative;
   width: 100%;
   padding-top: calc(56.25% + var(--pdf-ui-height));
