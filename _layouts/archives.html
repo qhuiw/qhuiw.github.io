@@ -33,3 +33,43 @@ layout: page
     {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
 </div>
+
+<div class="pl-xl-3 mt-5">
+  <h2><a href="{{ '/archives/categories/' | relative_url }}">Categories</a></h2>
+  <div id="archive-categories" class="d-flex flex-wrap mx-xl-2">
+    {% assign categories = '' | split: '' %}
+    {% for c in site.categories %}
+      {% assign categories = categories | push: c[0] %}
+    {% endfor %}
+
+    {% assign sorted_categories = categories | sort_natural %}
+
+    {% for c in sorted_categories %}
+      <div>
+        <a class="tag" href="{{ c | slugify | url_encode | prepend: '/archives/categories/' | append: '/' | relative_url }}">
+          {{ c -}}
+          <span class="text-muted">{{ site.categories[c].size }}</span>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2 class="mt-4"><a href="{{ '/archives/tags/' | relative_url }}">Tags</a></h2>
+  <div id="tags" class="d-flex flex-wrap mx-xl-2">
+    {% assign tags = '' | split: '' %}
+    {% for t in site.tags %}
+      {% assign tags = tags | push: t[0] %}
+    {% endfor %}
+
+    {% assign sorted_tags = tags | sort_natural %}
+
+    {% for t in sorted_tags %}
+      <div>
+        <a class="tag" href="{{ t | slugify | url_encode | prepend: '/archives/tags/' | append: '/' | relative_url }}">
+          {{ t -}}
+          <span class="text-muted">{{ site.tags[t].size }}</span>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>

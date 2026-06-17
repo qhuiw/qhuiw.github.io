@@ -78,3 +78,28 @@ A `/portfolio/` tab showcasing vocal covers as audio cards with a karaoke-style 
 
 > `lang.html` and `language-alias.html` are **stock** v7.5.0 includes (lang detection + code-block language-alias display), *not* a custom multilingual layer — nothing to port there.
 > ⚠ Browser spot-check needed for the JS-driven bits: audio playback, transcript karaoke sync, zh/en toggle, waveform visualizer.
+
+### Posts / Archives taxonomy routing  ⚠ (largest structural drift)
+Stock Chirpy has 3 separate tabs (Archives, Categories, Tags) with taxonomy at `/categories/` and `/tags/`. This site instead has **one "Posts" tab** (post timeline + inline Categories/Tags summaries) and routes **all taxonomy under `/archives/`**. Getting this consistent touches several stock files — re-apply all of them together after an upstream merge, or the breadcrumbs/links break.
+
+**New files**
+- `_archives/categories.md` (`layout: categories`) → index page at `/archives/categories/`.
+- `_archives/tags.md` (`layout: tags`) → index page at `/archives/tags/`.
+
+**Deleted stock files**
+- `_tabs/categories.md`, `_tabs/tags.md` — replaced by the `/archives/` index pages above.
+
+**⚠ Modified stock files** (all needed for links to resolve — htmlproofer enforces this):
+- `_config.yml` — (a) added the `archives` collection (`output: true`, `permalink: /archives/:title/`); (b) `jekyll-archives.permalinks` → `tag: /archives/tags/:name/`, `category: /archives/categories/:name/` (stock is `/tags/:name/`, `/categories/:name/`).
+- `_data/locales/en.yml` — added `tabs.posts: Posts` (the Archives tab is titled "Posts").
+- `_tabs/archives.md` — `title: Posts` (was "Archives"), `order: 3`.
+- `_layouts/archives.html` — appended inline **Categories** + **Tags** sections (headings link to `/archives/categories/` and `/archives/tags/`; per-item links to `/archives/categories|tags/:name/`).
+- `_layouts/categories.html` — per-category link prefix `/categories/` → `/archives/categories/` (2 spots).
+- `_layouts/tags.html` — per-tag link prefix `/tags/` → `/archives/tags/` (1 spot).
+- `_layouts/post.html` — post-tail category link → `/archives/categories/…`, tag link → `/archives/tags/…`.
+- `_includes/trending-tags.html` — tag link prepend `/tags/` → `/archives/tags/`.
+- `_includes/topbar.html` — **breadcrumb** rewritten to accumulate the *cumulative* path (and handle `categories`/`tags` layouts), so nested `/archives/categories/<name>/` breadcrumbs link to each ancestor correctly instead of `/categories/`. (Only the breadcrumb `<nav>` block was changed — the old repo's other topbar tweaks were intentionally NOT ported.)
+
+### Misc data/content
+- **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.
+- **`_posts/2026-03-21-mte-architectural-support.md`** — re-ported (was malformed/0-byte during the base port; user fixed it upstream).

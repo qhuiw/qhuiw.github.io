@@ -167,6 +167,9 @@ collections:
   tabs:
     output: true
     sort_by: order
+  archives: # custom: index pages served at /archives/categories/ and /archives/tags/
+    output: true
+    permalink: /archives/:title/
 
 defaults:
   - scope:
@@ -219,5 +222,5 @@ jekyll-archives:
     category: category
     tag: tag
   permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
+    tag: /archives/tags/:name/
+    category: /archives/categories/:name/
