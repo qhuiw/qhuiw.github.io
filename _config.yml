@@ -31,6 +31,14 @@ github:
 twitter:
   username: # change to your Twitter username
 
+# custom: drives the sidebar YouTube/LinkedIn icons (see _includes/sidebar.html contact case)
+youtube:
+  username: qianhui8571
+  channel_id: UCUatIhw9K39ygZTnl2q4VGg
+
+linkedin:
+  username: qianhui-w
+
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer

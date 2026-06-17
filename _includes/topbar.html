@@ -3,9 +3,9 @@
 <header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
   <div
     id="topbar"
-    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+    class="d-flex align-items-center px-lg-3 h-100"
   >
-    <nav id="breadcrumb" aria-label="Breadcrumb">
+    <nav id="breadcrumb" aria-label="Breadcrumb" class="flex-grow-1">
       {% assign paths = page.url | split: '/' %}
       {% assign breadcrumb_path = '' %}
 
@@ -76,5 +76,13 @@
     <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
       {{- site.data.locales[include.lang].search.cancel -}}
     </button>
+
+    {% comment %} custom: mode-toggle moved here from the sidebar {% endcomment %}
+    {% unless site.theme_mode %}
+      <div class="ms-3"></div>
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+    {% endunless %}
   </div>
 </header>

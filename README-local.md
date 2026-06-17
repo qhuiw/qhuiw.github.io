@@ -100,6 +100,17 @@ Stock Chirpy has 3 separate tabs (Archives, Categories, Tags) with taxonomy at `
 - `_includes/trending-tags.html` — tag link prepend `/tags/` → `/archives/tags/`.
 - `_includes/topbar.html` — **breadcrumb** rewritten to accumulate the *cumulative* path (and handle `categories`/`tags` layouts), so nested `/archives/categories/<name>/` breadcrumbs link to each ancestor correctly instead of `/categories/`. (Only the breadcrumb `<nav>` block was changed — the old repo's other topbar tweaks were intentionally NOT ported.)
 
+### Sidebar & topbar — mode-toggle move + extra social icons
+The dark/light **mode-toggle was moved from the sidebar into the topbar** (right end), and the sidebar contact list supports more social networks.
+
+**⚠ Modified stock files**
+- `_includes/sidebar.html` — (a) mode-toggle button commented out (now in the topbar); (b) contact `{% case entry.type %}` extended with **youtube / facebook / instagram / linkedin / mastodon** branches that build the URL from `site.<type>.username` (stock only handles github/twitter/email).
+- `_includes/topbar.html` — mode-toggle button added after the search controls; breadcrumb `<nav>` given `class="flex-grow-1"` and `#topbar` dropped `justify-content-between` so the toggle sits at the right. (The breadcrumb cumulative-path change is under the Archives section above.)
+- `_config.yml` — added `youtube:` (username `qianhui8571`, channel_id) and `linkedin:` (username `qianhui-w`).
+- `_data/contact.yml` — enabled the `youtube` entry; switched `linkedin` to the username form (dropped its explicit `url`, now built from `site.linkedin.username`).
+
+> The `#mode-toggle` JS keys off the element id, so relocating it needs no JS change. The old repo's avatar (`avatar_use_media_url` + `object-fit`) and `<h1>` site-title tweaks were **not** ported (minor; revisit if wanted). Nav still labels the archives tab "Archives" (from `tabs.archives`) while its page title is "Posts" — matches the old site; change `tabs.archives` if you want "Posts" in the nav too.
+
 ### Misc data/content
 - **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.
 - **`_posts/2026-03-21-mte-architectural-support.md`** — re-ported (was malformed/0-byte during the base port; user fixed it upstream).
