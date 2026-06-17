@@ -8,4 +8,7 @@
 {%- endif -%}
 ';
 
+/* === Local customizations — see README-local.md (custom feature styles) === */
+@use 'custom/research';
+
 /* append your custom style below */

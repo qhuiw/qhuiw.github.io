@@ -1,0 +1,44 @@
+<article class="pub-item">
+  <div class="pub-thumb">
+    {% if include.preview_pdf %}
+      <div class="pdf-frame">
+        <iframe src="{{ include.preview_pdf }}" title="{{ include.preview_alt | default: 'Publication preview' }}"></iframe>
+      </div>
+    {% elsif include.preview_img %}
+      <img src="{{ include.preview_img }}" alt="{{ include.preview_alt | default: 'Publication preview' }}">
+    {% endif %}
+  </div>
+
+  <div class="pub-body">
+    <h3 class="pub-title">
+      <span class="pub-title-text">
+        {% if include.title_html %}
+          {{ include.title_html }}
+        {% else %}
+          {{ include.title }}
+        {% endif %}
+      </span>
+    </h3>
+
+    {% if include.meta_html %}
+      <p class="pub-meta">{{ include.meta_html }}</p>
+    {% elsif include.meta %}
+      <p class="pub-meta">{{ include.meta }}</p>
+    {% endif %}
+
+    {% if include.summary_html or include.summary %}
+      <p class="pub-abstract">
+        <span class="abstract-keyword">{{ include.keyword | default: 'TL;DR:' }}</span>
+        {% if include.summary_html %}
+          {{ include.summary_html }}
+        {% else %}
+          {{ include.summary }}
+        {% endif %}
+      </p>
+    {% endif %}
+
+    {% if include.links_html %}
+      <p class="pub-links">{{ include.links_html }}</p>
+    {% endif %}
+  </div>
+</article>
