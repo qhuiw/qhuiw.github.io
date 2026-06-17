@@ -25,3 +25,6 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
+
+# Local Claude Code preview server config
+.claude/launch.json

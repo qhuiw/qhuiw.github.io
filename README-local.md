@@ -36,6 +36,7 @@ you know exactly what was changed, why, and how to re-apply it.
   {% endif %}
   ```
 - **`assets/img/favicons/*`** — replaced stock favicons with the site's own.
+- **`_data/locales/en.yml`** — added `tabs.portfolio` + `tabs.research`. v7.5.0 builds each tab's `<title>` via `site.data.locales[lang].tabs[{{ page.title | downcase }}]`, so **every custom tab must add a matching key here** or its browser-tab `<title>` renders blank. (Also `_tabs/about.md` title changed "About Me" → "About" so it matches the stock `tabs.about` key — the convention is tab title == filename == locale key.)
 
 ### New files
 - `_includes/cite.html`, `_includes/references.html` — citation feature (inline `{% include cite.html n=N %}` markers + a bibliography list rendered from a post's `references:` front matter).
