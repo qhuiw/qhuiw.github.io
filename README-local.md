@@ -91,8 +91,9 @@ Stock Chirpy has 3 separate tabs (Archives, Categories, Tags) with taxonomy at `
 
 **⚠ Modified stock files** (all needed for links to resolve — htmlproofer enforces this):
 - `_config.yml` — (a) added the `archives` collection (`output: true`, `permalink: /archives/:title/`); (b) `jekyll-archives.permalinks` → `tag: /archives/tags/:name/`, `category: /archives/categories/:name/` (stock is `/tags/:name/`, `/categories/:name/`).
-- `_data/locales/en.yml` — added `tabs.posts: Posts` (the Archives tab is titled "Posts").
-- `_tabs/archives.md` — `title: Posts` (was "Archives"), `order: 3`.
+- `_tabs/archives.md` — `order: 3`, custom `icon`; title kept as stock **"Archives"** so nav + `<title>` + breadcrumb stay consistent (no extra locale key needed — uses stock `tabs.archives`).
+- `_layouts/page.html` — heading condition extended to `page.layout == 'categories' or page.layout == 'tags'`, so the `/archives/categories/` and `/archives/tags/` index pages (in the `archives` collection) render their `<h1>` dynamic-title. Without this they had **no heading** (looked bare).
+- `_layouts/archives.html` — also added an `<h2>Posts</h2>` above the timeline, so the Archives page reads as three sibling sections: **Posts / Categories / Tags**.
 - `_layouts/archives.html` — appended inline **Categories** + **Tags** sections (headings link to `/archives/categories/` and `/archives/tags/`; per-item links to `/archives/categories|tags/:name/`).
 - `_layouts/categories.html` — per-category link prefix `/categories/` → `/archives/categories/` (2 spots).
 - `_layouts/tags.html` — per-tag link prefix `/tags/` → `/archives/tags/` (1 spot).
@@ -109,7 +110,11 @@ The dark/light **mode-toggle was moved from the sidebar into the topbar** (right
 - `_config.yml` — added `youtube:` (username `qianhui8571`, channel_id) and `linkedin:` (username `qianhui-w`).
 - `_data/contact.yml` — enabled the `youtube` entry; switched `linkedin` to the username form (dropped its explicit `url`, now built from `site.linkedin.username`).
 
-> The `#mode-toggle` JS keys off the element id, so relocating it needs no JS change. The old repo's avatar (`avatar_use_media_url` + `object-fit`) and `<h1>` site-title tweaks were **not** ported (minor; revisit if wanted). Nav still labels the archives tab "Archives" (from `tabs.archives`) while its page title is "Posts" — matches the old site; change `tabs.archives` if you want "Posts" in the nav too.
+> The `#mode-toggle` JS keys off the element id, so relocating it needs no JS change. The old repo's `<h1>` site-title tweak was **not** ported (minor).
+
+### Sidebar avatar — larger & centred
+**New file**
+- `_sass/custom/_sidebar.scss` — enlarges `#avatar` to `8.5rem`, centres it (symmetric `.profile-wrapper` padding + `margin: auto`), and adds `#avatar img { object-fit: cover }` so a non-square photo crops cleanly into the circle. Imported via `@use 'custom/sidebar'` in `assets/css/jekyll-theme-chirpy.scss`. **CSS-only** — deliberately does *not* touch `sidebar.html`. (The old repo achieved this by editing the avatar markup + an `avatar_use_media_url` toggle; the CSS-only override is lower-drift and gives the same larger+centred result.)
 
 ### Misc data/content
 - **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.

@@ -18,7 +18,6 @@ tabs:
   "about me": About Me # custom: about.md keeps the title "About Me" (key = title|downcase)
   portfolio: Portfolio
   research: Research
-  posts: Posts # custom: the Archives tab is titled "Posts"
 
 # the text displayed in the search bar & search results
 search:
