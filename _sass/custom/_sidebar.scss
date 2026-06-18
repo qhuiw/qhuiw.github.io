@@ -18,4 +18,12 @@
       object-fit: cover;
     }
   }
+
+  /* upstream sets `.site-title { width: fit-content }`, so the shrink-wrapped
+     box sits left — centre it (and the subtitle) under the avatar */
+  .site-title,
+  .site-subtitle {
+    margin-right: auto;
+    margin-left: auto;
+  }
 }

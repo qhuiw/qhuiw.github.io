@@ -112,9 +112,12 @@ The dark/light **mode-toggle was moved from the sidebar into the topbar** (right
 
 > The `#mode-toggle` JS keys off the element id, so relocating it needs no JS change. The old repo's `<h1>` site-title tweak was **not** ported (minor).
 
-### Sidebar avatar — larger & centred
+### Sidebar avatar + title — larger & centred
 **New file**
-- `_sass/custom/_sidebar.scss` — enlarges `#avatar` to `8.5rem`, centres it (symmetric `.profile-wrapper` padding + `margin: auto`), and adds `#avatar img { object-fit: cover }` so a non-square photo crops cleanly into the circle. Imported via `@use 'custom/sidebar'` in `assets/css/jekyll-theme-chirpy.scss`. **CSS-only** — deliberately does *not* touch `sidebar.html`. (The old repo achieved this by editing the avatar markup + an `avatar_use_media_url` toggle; the CSS-only override is lower-drift and gives the same larger+centred result.)
+- `_sass/custom/_sidebar.scss` — (a) enlarges `#avatar` to `8.5rem` + `object-fit: cover` (crops a non-square photo cleanly); (b) centres the profile block via symmetric `.profile-wrapper` padding + `margin: auto` on `#avatar`; (c) centres `.site-title` / `.site-subtitle` with `margin: auto` — needed because upstream sets `.site-title { width: fit-content }`, so the shrink-wrapped box otherwise sits left even with `text-align: center`. Imported via `@use 'custom/sidebar'` in `assets/css/jekyll-theme-chirpy.scss`. **CSS-only** — does *not* touch `sidebar.html` (lower-drift than the old repo's markup edits).
+
+**⚠ Modified stock file**
+- `_data/locales/en.yml` — footer credit `meta:` changed "Using the :THEME theme…" → **"Adapted from the :THEME theme for :PLATFORM."** (the site adapts Chirpy rather than using it as-is).
 
 ### Misc data/content
 - **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.
