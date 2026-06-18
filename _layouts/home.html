@@ -135,6 +135,11 @@ layout: default
 </div>
 <!-- #post-list -->
 
+{% comment %} custom: friendly sign-off at the very end of the post list {% endcomment %}
+{% if paginator.page == paginator.total_pages %}
+  <p class="text-center text-muted mt-4 mb-0">More posts coming soon.</p>
+{% endif %}
+
 {% if paginator.total_pages > 1 %}
   {% include post-paginator.html %}
 {% endif %}

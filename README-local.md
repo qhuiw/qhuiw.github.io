@@ -114,10 +114,14 @@ The dark/light **mode-toggle was moved from the sidebar into the topbar** (right
 
 ### Sidebar avatar + title — larger & centred
 **New file**
-- `_sass/custom/_sidebar.scss` — (a) enlarges `#avatar` to `8.5rem` + `object-fit: cover` (crops a non-square photo cleanly); (b) centres the profile block via symmetric `.profile-wrapper` padding + `margin: auto` on `#avatar`; (c) centres `.site-title` / `.site-subtitle` with `margin: auto` — needed because upstream sets `.site-title { width: fit-content }`, so the shrink-wrapped box otherwise sits left even with `text-align: center`. Imported via `@use 'custom/sidebar'` in `assets/css/jekyll-theme-chirpy.scss`. **CSS-only** — does *not* touch `sidebar.html` (lower-drift than the old repo's markup edits).
+- `_sass/custom/_sidebar.scss` — (a) enlarges `#avatar` to `9.5rem` + `object-fit: cover` (crops a non-square photo cleanly); (b) centres the profile block via symmetric `.profile-wrapper` padding + `margin: auto` on `#avatar`; (c) centres `.site-title` / `.site-subtitle` with `margin: auto` — needed because upstream sets `.site-title { width: fit-content }`, so the shrink-wrapped box otherwise sits left even with `text-align: center`. Imported via `@use 'custom/sidebar'` in `assets/css/jekyll-theme-chirpy.scss`. **CSS-only** — does *not* touch `sidebar.html` (lower-drift than the old repo's markup edits).
 
 **⚠ Modified stock file**
 - `_data/locales/en.yml` — footer credit `meta:` changed "Using the :THEME theme…" → **"Adapted from the :THEME theme for :PLATFORM."** (the site adapts Chirpy rather than using it as-is).
+
+### Home page
+**⚠ Modified stock file**
+- `_layouts/home.html` — added a **"More posts coming soon."** sign-off after the post list, shown only on the last pagination page (`paginator.page == paginator.total_pages`). In production (10 posts → single page) it lands on the home page; in dev the visible demo posts add a 2nd page so it shows there.
 
 ### Misc data/content
 - **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.
