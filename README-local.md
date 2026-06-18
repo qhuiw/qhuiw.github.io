@@ -119,3 +119,16 @@ The dark/light **mode-toggle was moved from the sidebar into the topbar** (right
 ### Misc data/content
 - **`_data/share.yml`** — Telegram **commented out** (kept, not deleted); LinkedIn + Weibo uncommented/enabled.
 - **`_posts/2026-03-21-mte-architectural-support.md`** — re-ported (was malformed/0-byte during the base port; user fixed it upstream).
+
+### Local-only reference posts (demos visible in preview, hidden when deployed)
+The bundled Chirpy demo posts are kept as a writing/structure reference, but never appear on the live site.
+
+**New files**
+- `_plugins/hide-in-production.rb` — a `:site, :post_read` hook that drops any post with front-matter `hidden_in_prod: true` from the build **when `JEKYLL_ENV=production`** (excludes them from home, archives, categories/tags, feed, and their own pages).
+- The 4 demo posts `_posts/2019-*.md` (text-and-typography, write-a-new-post, getting-started, customize-the-favicon) each carry `hidden_in_prod: true`.
+
+**Behaviour**
+- Local preview (`bundle exec jekyll serve`, default `JEKYLL_ENV=development`) → demos **visible** (reference while drafting).
+- Production (deploy + `tools/test.sh`/CI, which set `JEKYLL_ENV=production`) → demos **hidden**.
+- Bonus: the demos' hero images come from the Chirpy CDN (`/commons/...`) and 404 under `cdn: ""`; hiding them in production keeps **htmlproofer** green (those broken links never reach the prod build it checks). The demo images also won't load in *local* preview — they're kept for structure/front-matter reference, not their images.
+- ⚠ Run htmlproofer only on a **production** build (`tools/test.sh`); a dev build includes the demos' broken `/commons/` links.
