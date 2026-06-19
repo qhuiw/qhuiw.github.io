@@ -20,6 +20,12 @@ you know exactly what was changed, why, and how to re-apply it.
 - Local build: `bundle install`; `npm install`; `npm run build` (generates `_sass/vendors/` + `assets/js/dist/`); `bundle exec jekyll serve`. Production check: `JEKYLL_ENV=production bundle exec jekyll build`.
 - **CI gates** (run on push to *any* branch, incl. `wip`): `lint-scss` (`npm run lint:scss` — custom SCSS must conform; auto-fix via `npm run lint:fix:scss`), `lint-js` (`npm run lint:js`), and `ci` (`bash tools/test.sh` = production build + **htmlproofer internal-link check**). Run all three locally before pushing. Note: because `cdn` is empty, htmlproofer treats former-CDN image paths as internal — any post relying on CDN-hosted images will fail it.
 
+## Deployment & rollback
+- **Live site:** https://qhuiw.github.io, deployed from branch **`main`** (the default branch) by `.github/workflows/pages-deploy.yml` on every push (it `paths-ignore`s `README*`/`.gitignore`/`LICENSE`). The workflow checks out with `submodules: recursive`, runs `npm run build`, `JEKYLL_ENV=production` jekyll build, htmlproofer, then `deploy-pages`. (`cd.yml` is the upstream *gem-release* pipeline — irrelevant to the site.)
+- **Branches:** `main` = live new site. `master`@`4acc1df` = previous live site, **kept untouched as the rollback target**. `legacy`@`64064c8` = full old-site backup. `wip` = pre-cutover staging (redundant; safe to delete later). `production`/`dependabot/*` = stale leftovers.
+- **To roll back to the old site:** re-run the last `master` *"pages build and deployment"* run from the repo's Actions/Deployments tab (redeploys `4acc1df` as-is), or flip the Pages source back to `master`. `master` is intact, so it's a ~2-minute rollback. giscus comments are unaffected (same repo).
+- **Deferred cleanup (only once confident):** delete `wip`/`production`/`dependabot` branches + the 87 inherited upstream tags. **Do not delete `master`/`legacy`** until you no longer want the safety net.
+
 ---
 
 ## Phase 0–3 — base port
