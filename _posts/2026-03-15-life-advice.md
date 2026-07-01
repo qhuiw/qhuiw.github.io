@@ -4,6 +4,8 @@ date: 2026-03-01 00:00:00 +0000
 author: qianhui
 categories: [Personal Growth]
 tags: [Advice, Life]
+render_with_liquid: false
+hidden_in_prod: true # hidden on the live site; still visible in local preview
 ---
 
 ## A Brief Note
